@@ -48,6 +48,12 @@ dependencies {
     kapt commonDependencies.daggerAP
     compileOnly commonDependencies.javaxAnnotation
 
+    // lifecycle
+    implementation commonDependencies.lifecycleExtensions
+    kapt commonDependencies.lifecycleCompiler
+    implementation commonDependencies.lifecycleRuntime
+    implementation commonDependencies.lifecycleReactivestreams
+
     // test
     testImplementation commonTestDependencies.junit
     androidTestImplementation commonTestDependencies.androidRunner

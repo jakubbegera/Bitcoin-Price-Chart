@@ -1,4 +1,4 @@
-package cz.begera.bitcoin_price_chart.base
+package cz.begera.bitcoin_price_chart.base.extensions
 
 import cz.begera.bitcoin_price_chart.base.presentation.BaseInjectingActivity
 import cz.begera.bitcoin_price_chart.base.presentation.BaseInjectingFragment

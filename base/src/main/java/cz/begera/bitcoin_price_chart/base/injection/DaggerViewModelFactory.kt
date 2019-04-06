@@ -1,4 +1,4 @@
-package cz.begera.bitcoin_price_chart.presentation
+package cz.begera.bitcoin_price_chart.base.injection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

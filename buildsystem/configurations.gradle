@@ -1,0 +1,11 @@
+ext {
+    android = [
+            minSdkVersion    : 21,
+            targetSdkVersion : 28,
+            compileSdkVersion: 28
+    ]
+
+    endpoints = [
+            blockchain_endpoint_url = "\"https://api.blockchain.info/charts/\""
+    ]
+}

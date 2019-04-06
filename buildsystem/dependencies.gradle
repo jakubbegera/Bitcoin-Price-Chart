@@ -1,0 +1,56 @@
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+ext {
+    // Libraries
+    appcompat = '1.1.0-alpha03'
+    androidxCore = '1.1.0-alpha05'
+    lifecycle = '2.0.0'
+    dagger = '2.19'
+    javaxAnnotation = '10.0-b28'
+    androidxAnnotation = '1.0.2'
+
+    // testing
+    junit = '4.12'
+    androidRunner = '1.1.2-alpha02'
+    espresso = '3.2.0-alpha02'
+
+    commonDependencies = [
+            // Android
+            appcompat                       : "androidx.appcompat:appcompat:${appcompat}",
+            androidxCore                    : "androidx.core:core-ktx:${androidxCore}",
+            androidxAnnotation              : "androidx.annotation:annotation:${androidxAnnotation}",
+
+            // Kotlin
+            kotlin                          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+
+            // DAGGER
+            dagger                          : "com.google.dagger:dagger:${dagger}",
+            daggerCompiler                  : "com.google.dagger:dagger-compiler:${dagger}",
+            daggerAndroid                   : "com.google.dagger:dagger-android:${dagger}",
+            daggerAndroidSupport            : "com.google.dagger:dagger-android-support:${dagger}",
+            daggerAP                        : "com.google.dagger:dagger-android-processor:${dagger}",
+            javaxAnnotation                 : "org.glassfish:javax.annotation:${javaxAnnotation}",
+
+            // lifecycle
+            lifecycleExtensions             :"android.arch.lifecycle:extensions:${lifecycle}",
+            lifecycleCompiler               :"android.arch.lifecycle:compiler:${lifecycle}",
+            lifecycleRuntime                :"android.arch.lifecycle:runtime:${lifecycle}",
+            lifecycleReactivestreams        :"android.arch.lifecycle:reactivestreams:${lifecycle}",
+    ]
+
+    commonTestDependencies = [
+            junit                           : "junit:junit:${junit}",
+            androidRunner                   : "androidx.test:runner:${androidRunner}",
+            espresso                        : "androidx.test.espresso:espresso-core:${espresso}",
+    ]
+
+    developmentDependencies = [
+
+    ]
+}

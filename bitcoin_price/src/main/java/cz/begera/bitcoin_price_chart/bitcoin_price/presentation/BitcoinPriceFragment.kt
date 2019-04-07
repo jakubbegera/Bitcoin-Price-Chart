@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
+import com.google.android.material.chip.Chip
 import cz.begera.bitcoin_price_chart.base.extensions.getBaseInjectingActivity
 import cz.begera.bitcoin_price_chart.base.extensions.gone
 import cz.begera.bitcoin_price_chart.base.extensions.visible
@@ -76,8 +77,20 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
         viewModel = ViewModelProviders.of(this, this.viewModeFactory).get(BitcoinPriceViewModel::class.java)
         viewModel.creditListLiveData.observe(this, Observer { this.renderModel(it) })
 
+        var selectedChip = R.id.chip_timespan_30days
         chips_timespan.setOnCheckedChangeListener { _, resID ->
-            val timespan = when (resID) {
+
+            // check if currently checked chip has been unchecked
+            val validatedResId = if (chips_timespan.checkedChipId != -1) {
+                resID
+            } else {
+                chips_timespan.findViewById<Chip>(selectedChip)?.isChecked = true
+                selectedChip
+            }
+            if (validatedResId == selectedChip) return@setOnCheckedChangeListener // no change
+            selectedChip = validatedResId
+
+            val timespan = when (selectedChip) {
                 R.id.chip_timespan_30days -> Timespan.DAYS30
                 R.id.chip_timespan_60days -> Timespan.DAYS60
                 R.id.chip_timespan_180days -> Timespan.DAYS180
@@ -85,14 +98,14 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
                 R.id.chip_timespan_2years -> Timespan.YEAR2
                 R.id.chip_timespan_all -> Timespan.ALL_TIME
                 else -> {
-                    Timber.e("Timespan chip button id $resID not recognized.")
+                    Timber.e("Timespan chip button id $validatedResId not recognized.")
                     return@setOnCheckedChangeListener
                 }
             }
             viewModel.bindToBitcoinPrice(timespan)
         }
 
-        chips_timespan.check(R.id.chip_timespan_30days)
+        chips_timespan.check(selectedChip)
     }
 
     private fun renderModel(model: BitcoinPriceModel) {

@@ -106,6 +106,7 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
         }
 
         chips_timespan.check(selectedChip)
+        viewModel.bindToBitcoinPrice(Timespan.DAYS30)
     }
 
     private fun renderModel(model: BitcoinPriceModel) {

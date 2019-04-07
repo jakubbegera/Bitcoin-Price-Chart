@@ -47,7 +47,10 @@ dependencies {
     api commonDependencies.appcompat
 
     // Dagger
-    api commonDependencies.dagger
+    implementation commonDependencies.dagger
+    kapt commonDependencies.daggerCompiler
+    implementation commonDependencies.daggerAndroid
+    implementation commonDependencies.daggerAndroidSupport
     kapt commonDependencies.daggerAP
     compileOnly commonDependencies.javaxAnnotation
 

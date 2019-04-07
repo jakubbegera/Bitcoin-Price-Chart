@@ -50,7 +50,8 @@ dependencies {
     api commonDependencies.materialDesign
 
     // Dagger
-    api commonDependencies.dagger
+    implementation commonDependencies.dagger
+    kapt commonDependencies.daggerCompiler
     kapt commonDependencies.daggerAP
     compileOnly commonDependencies.javaxAnnotation
 

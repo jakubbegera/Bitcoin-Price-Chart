@@ -8,7 +8,7 @@ import dagger.Subcomponent
  * Created by Jakub Begera (jakub@begera.cz) on 06/04/2019.
  */
 @FragmentScope
-@Subcomponent(modules = [BitcoinPriceModule::class, ViewModelModule::class, BitcoinPriceDataModule::class])
+@Subcomponent(modules = [BitcoinPriceModule::class, ViewModelModule::class])
 interface BitcoinPriceComponent {
 
     fun inject(fragment: BitcoinPriceFragment)

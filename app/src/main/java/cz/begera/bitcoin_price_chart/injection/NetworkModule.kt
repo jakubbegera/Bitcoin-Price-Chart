@@ -76,7 +76,7 @@ class NetworkModule {
             .build()
     }
 
-    // TODO move following i
+    // TODO move following functions into BitcoinPriceDataModule
 
     @Provides
     @Singleton

@@ -2,11 +2,9 @@ package cz.begera.bitcoin_price_chart.bitcoin_price.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import cz.begera.bitcoin_price_chart.bitcoin_price.data.BlockchainChart
 import cz.begera.bitcoin_price_chart.bitcoin_price.data.Timespan
 import cz.begera.bitcoin_price_chart.bitcoin_price.domain.RetrieveBitcoinPrice
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,27 +18,27 @@ class BitcoinPriceViewModel @Inject constructor(
 
     private val compositeDisposable = CompositeDisposable()
 
-    val creditListLiveData = MutableLiveData<BlockchainChart>()
-
-    init {
-        compositeDisposable.add(bindToBitcoinPrice())
-    }
+    val creditListLiveData = MutableLiveData<BitcoinPriceModel>()
 
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
     }
 
-    private fun bindToBitcoinPrice(): Disposable {
-        return retrieveBitcoinPrice.getBehaviorStream(Timespan.DAYS30)
+    fun bindToBitcoinPrice(timespan: Timespan) {
+        compositeDisposable.clear()
+        creditListLiveData.postValue(BitcoinPriceModel.Loading)
+        retrieveBitcoinPrice.getBehaviorStream(timespan)
             .observeOn(Schedulers.computation())
             .subscribe(
                 {
-                    creditListLiveData.postValue(it)
+                    creditListLiveData.postValue(BitcoinPriceModel.Data(it))
                 },
                 { e ->
                     Timber.e(e, "Error updating credit list live data")
+                    creditListLiveData.postValue(BitcoinPriceModel.Error)
                 }
             )
+            .apply { compositeDisposable.add(this) }
     }
 }

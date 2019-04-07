@@ -19,5 +19,10 @@ data class ChartValue(
 val blockchainChartIdExtractor = Function<BlockchainChart, String> {t -> t.timespan }
 
 enum class Timespan(val key: String) {
-    DAYS30("30days")
+    DAYS30("30days"),
+    DAYS60("60days"),
+    DAYS180("180days"),
+    YEAR1("1year"),
+    YEAR2("2year"),
+    ALL_TIME("all")
 }

@@ -46,6 +46,9 @@ dependencies {
     api commonDependencies.androidxAnnotation
     api commonDependencies.androidxCore
     api commonDependencies.appcompat
+    api commonDependencies.androidxconstraintlayout
+    api commonDependencies.materialDesign
+
 
     // Dagger
     api commonDependencies.dagger

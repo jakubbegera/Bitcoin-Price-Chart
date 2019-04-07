@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Bitcoin Price</string>
+    <string name="timespan_30days">30 Days</string>
+    <string name="timespan_60days">60 Days</string>
+    <string name="timespan_180days">180 Days</string>
+    <string name="timespan_1year">1 Year</string>
+    <string name="timespan_2years">2 Years</string>
+    <string name="timespan_all_time">All Time</string>
+    <string name="chart_loading_error">Oops… something went wrong :-(</string>
 </resources>

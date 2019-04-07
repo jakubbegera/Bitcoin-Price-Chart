@@ -1,14 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <TextView
-            android:id="@+id/txv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BITCOIN!"/>
+            android:id="@+id/txv_data"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="gone"/>
 
-</LinearLayout>
+    <TextView
+            android:id="@+id/txv_error"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
+            app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:gravity="center"
+            android:visibility="gone"
+            tools:text="some error text"
+            tools:visibility="visible"/>
+
+    <ProgressBar
+            android:id="@+id/prb_loading"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="gone"/>
+
+    <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chips_timespan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true"
+                app:singleSelection="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp">
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_timespan_30days"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipBackgroundColor="@color/bg_chip_state_list"
+                    android:text="@string/timespan_30days"/>
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_timespan_60days"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipBackgroundColor="@color/bg_chip_state_list"
+                    android:text="@string/timespan_60days"/>
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_timespan_180days"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipBackgroundColor="@color/bg_chip_state_list"
+                    android:text="@string/timespan_180days"/>
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_timespan_1year"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipBackgroundColor="@color/bg_chip_state_list"
+                    android:text="@string/timespan_1year"/>
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_timespan_2years"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipBackgroundColor="@color/bg_chip_state_list"
+                    android:text="@string/timespan_2years"/>
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_timespan_all"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipBackgroundColor="@color/bg_chip_state_list"
+                    android:text="@string/timespan_all_time"/>
+
+
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

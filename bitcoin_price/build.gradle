@@ -49,7 +49,6 @@ dependencies {
     api commonDependencies.androidxconstraintlayout
     api commonDependencies.materialDesign
 
-
     // Dagger
     api commonDependencies.dagger
     kapt commonDependencies.daggerAP
@@ -60,6 +59,8 @@ dependencies {
     kapt commonDependencies.lifecycleCompiler
     implementation commonDependencies.lifecycleRuntime
     implementation commonDependencies.lifecycleReactivestreams
+
+    implementation commonDependencies.mpAndroidCharts
 
     // test
     testImplementation commonTestDependencies.junit

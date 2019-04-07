@@ -2,6 +2,7 @@
 <resources>
 
     <color name="chip_unselected">#DDDDDD</color>
-    <color name="chip_selected">#1F9399</color>
+    <color name="chip_selected">#3BAC98</color>
+    <color name="color_primary">#3BAC98</color>
 
 </resources>

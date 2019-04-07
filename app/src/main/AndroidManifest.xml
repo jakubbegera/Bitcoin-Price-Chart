@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="cz.begera.bitcoin_price_chart">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:name=".BitcoinPriceApplication"
             android:allowBackup="true"

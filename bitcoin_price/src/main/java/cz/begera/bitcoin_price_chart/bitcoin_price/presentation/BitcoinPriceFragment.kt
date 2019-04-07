@@ -1,12 +1,15 @@
 package cz.begera.bitcoin_price_chart.bitcoin_price.presentation
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import cz.begera.bitcoin_price_chart.base.extensions.getBaseInjectingActivity
 import cz.begera.bitcoin_price_chart.base.presentation.BaseInjectingFragment
 import cz.begera.bitcoin_price_chart.bitcoin_price.R
+import cz.begera.bitcoin_price_chart.bitcoin_price.data.BlockchainChart
 import cz.begera.bitcoin_price_chart.bitcoin_price.injection.BitcoinPriceComponent
+import kotlinx.android.synthetic.main.fragment_bitcoin_price.*
 import javax.inject.Inject
 
 /**
@@ -27,8 +30,13 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
             .inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, this.viewModeFactory).get(BitcoinPriceViewModel::class.java)
-        super.onCreate(savedInstanceState)
+        viewModel.creditListLiveData.observe(this, Observer { this.renderChart(it) })
+    }
+
+    private fun renderChart(blockchainChart: BlockchainChart) {
+        txv.text = blockchainChart.toString()
     }
 }

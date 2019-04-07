@@ -6,6 +6,6 @@ ext {
     ]
 
     endpoints = [
-            blockchain_endpoint_url = "\"https://api.blockchain.info/charts/\""
+            blockchain_endpoint_url = "\"https://api.blockchain.info/\""
     ]
 }

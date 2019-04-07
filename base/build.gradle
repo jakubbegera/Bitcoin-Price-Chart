@@ -13,8 +13,8 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BLOCKCHAIN_ENDPOINT_URL", blockchain_endpoint_url
 
     }
 
@@ -25,6 +25,10 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -46,6 +50,24 @@ dependencies {
     api commonDependencies.dagger
     kapt commonDependencies.daggerAP
     compileOnly commonDependencies.javaxAnnotation
+
+    // RxJava
+    api commonDependencies.rxJava
+    api commonDependencies.rxAndroid
+
+    // Retrofit
+    api commonDependencies.retrofit
+    api commonDependencies.retrofitRxAdapter
+    api commonDependencies.retrofitConverter
+
+    // okHttp
+    api commonDependencies.okHttp
+    api commonDependencies.okHttpInterceptor
+
+    // logging
+    api commonDependencies.timber
+
+    api commonDependencies.options
 
     // test
     testImplementation commonTestDependencies.junit

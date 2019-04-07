@@ -12,7 +12,7 @@ import javax.inject.Singleton
  * Created by Jakub Begera (jakub@begera.cz) on 06/04/2019.
  */
 @Singleton
-@Component(modules = [ViewModelFactoryModule::class])
+@Component(modules = [ApplicationModule::class, ViewModelFactoryModule::class, NetworkModule::class, DataModule::class])
 interface ApplicationComponent {
 
     fun inject(bitcoinPriceApplication: BitcoinPriceApplication)

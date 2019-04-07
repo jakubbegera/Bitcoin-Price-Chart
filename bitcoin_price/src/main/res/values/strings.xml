@@ -7,4 +7,10 @@
     <string name="timespan_2years">2 Years</string>
     <string name="timespan_all_time">All Time</string>
     <string name="chart_loading_error">Oops… something went wrong :-(</string>
+    <string name="chart_title">BTC ➞ %s</string>
+    <string name="price_lowest">lowest</string>
+    <string name="price_current">current</string>
+    <string name="price_highers">highers</string>
+    <string name="chart_marker">%s\n%s %.2f</string>
+
 </resources>

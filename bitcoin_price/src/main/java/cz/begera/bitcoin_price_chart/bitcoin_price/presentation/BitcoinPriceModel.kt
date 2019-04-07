@@ -8,5 +8,10 @@ import cz.begera.bitcoin_price_chart.bitcoin_price.data.BlockchainChart
 sealed class BitcoinPriceModel {
     object Loading : BitcoinPriceModel()
     object Error : BitcoinPriceModel()
-    class Data(val data: BlockchainChart) : BitcoinPriceModel()
+    class Data(
+        val data: BlockchainChart,
+        val lowestPrice: Double,
+        val currentPrice: Double,
+        val highersPrice: Double
+    ) : BitcoinPriceModel()
 }

@@ -5,4 +5,8 @@
     <color name="chip_selected">#3BAC98</color>
     <color name="color_primary">#3BAC98</color>
 
+    <color name="marker_gray">#565656</color>
+
+    <color name="header_gray">#8E8E93</color>
+
 </resources>

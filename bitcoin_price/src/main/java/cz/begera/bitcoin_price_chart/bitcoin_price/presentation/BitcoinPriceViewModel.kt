@@ -30,9 +30,17 @@ class BitcoinPriceViewModel @Inject constructor(
         creditListLiveData.postValue(BitcoinPriceModel.Loading)
         retrieveBitcoinPrice.getBehaviorStream(timespan)
             .observeOn(Schedulers.computation())
+            .map { data ->
+                BitcoinPriceModel.Data(
+                    data,
+                    data.values.minBy { it.y }?.y ?: throw RuntimeException("No data received."),
+                    data.values.lastOrNull()?.y ?: throw RuntimeException("No data received."),
+                    data.values.maxBy { it.y }?.y ?: throw RuntimeException("No data received.")
+                )
+            }
             .subscribe(
                 {
-                    creditListLiveData.postValue(BitcoinPriceModel.Data(it))
+                    creditListLiveData.postValue(it)
                 },
                 { e ->
                     Timber.e(e, "Error updating credit list live data")

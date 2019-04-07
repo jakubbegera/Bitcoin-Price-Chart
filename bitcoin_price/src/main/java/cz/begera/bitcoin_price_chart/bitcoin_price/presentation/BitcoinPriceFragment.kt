@@ -1,16 +1,21 @@
 package cz.begera.bitcoin_price_chart.bitcoin_price.presentation
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.utils.MPPointF
 import cz.begera.bitcoin_price_chart.base.extensions.getBaseInjectingActivity
 import cz.begera.bitcoin_price_chart.base.extensions.gone
 import cz.begera.bitcoin_price_chart.base.extensions.visible
@@ -21,6 +26,7 @@ import cz.begera.bitcoin_price_chart.bitcoin_price.data.Timespan
 import cz.begera.bitcoin_price_chart.bitcoin_price.injection.BitcoinPriceComponent
 import kotlinx.android.synthetic.main.fragment_bitcoin_price.*
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 
@@ -62,7 +68,6 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
         chart.axisRight.isEnabled = false
         chart.legend.isEnabled = false
 
-
         chart.invalidate()
     }
 
@@ -93,6 +98,7 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
     private fun renderModel(model: BitcoinPriceModel) {
         when (model) {
             is BitcoinPriceModel.Loading -> {
+                header_container.gone()
                 txv_error.gone()
                 chart.gone()
                 prb_loading.visible()
@@ -100,15 +106,19 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
             }
             is BitcoinPriceModel.Error -> {
                 txv_error.text = getString(R.string.chart_loading_error)
+                header_container.gone()
                 chart.gone()
                 prb_loading.gone()
                 txv_error.visible()
             }
             is BitcoinPriceModel.Data -> {
+                header_container.visible()
                 txv_error.gone()
                 prb_loading.gone()
                 chart.visible()
 
+                txv_title.text = getString(R.string.chart_title, model.data.unit)
+                renderPrices(model)
                 renderChart(model.data)
             }
         }
@@ -118,12 +128,16 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
         val entries = data.values.map { Entry(it.x.toFloat(), it.y.toFloat()) }
 
         // set data
-        chart.data?.takeIf { it.dataSetCount != 0 }?.getDataSetByIndex(0)?.let { it as? LineDataSet }?.let { dataSet ->
+        chart.data?.takeIf { it.dataSetCount != 0 }?.getDataSetByLabel(
+            "price",
+            true
+        )?.let { it as? LineDataSet }?.let { dataSet ->
             dataSet.values = entries
             chart.data.notifyDataChanged()
             chart.notifyDataSetChanged()
 
         } ?: let {
+            chart.clear()
 
             val lineDataSet = LineDataSet(entries, "price")
             lineDataSet.apply {
@@ -133,15 +147,13 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
 
                 setDrawFilled(true)
                 setDrawCircles(false)
-
+                highLightColor = ContextCompat.getColor(chart.context, R.color.color_primary)
 
                 // set the filled area
                 setDrawFilled(true)
                 fillFormatter = IFillFormatter { _, _ -> chart.axisLeft.axisMinimum }
                 val drawable = ContextCompat.getDrawable(chart.context, R.drawable.chart_bg)
                 fillDrawable = drawable
-
-
             }
 
             val lineData = LineData(lineDataSet)
@@ -153,5 +165,32 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
 
         chart.animateXY(300, 300, Easing.EaseInSine)
 
+        chart.marker = object : MarkerView(chart.context, R.layout.marker) {
+            override fun refreshContent(e: Entry?, highlight: Highlight?) {
+                // find given point in BlockchainChart (tolerance +- s)
+                e?.x?.toLong()?.let { x ->
+                    data.values.find { Math.abs(it.x - x) < 1000 }?.let {
+                        this.findViewById<TextView>(R.id.txv_date)?.text = getString(
+                            R.string.chart_marker,
+                            DateFormat.getDateFormat(chart.context).format(Date(it.x * 1000)),
+                            data.unit,
+                            it.y
+                        )
+                    }
+                }
+                super.refreshContent(e, highlight)
+            }
+
+            override fun getOffset(): MPPointF {
+                return MPPointF(-(width.toFloat() + height.toFloat() * 0.2f), -height.toFloat() * 1.2f)
+            }
+        }
     }
+
+    private fun renderPrices(model: BitcoinPriceModel.Data) {
+        txv_price_lowest.text = String.format("%.2f", model.lowestPrice)
+        txv_price_current.text = String.format("%.2f", model.currentPrice)
+        txv_price_highers.text = String.format("%.2f", model.highersPrice)
+    }
+
 }

@@ -18,7 +18,7 @@ class BitcoinPriceViewModel @Inject constructor(
 
     private val compositeDisposable = CompositeDisposable()
 
-    val creditListLiveData = MutableLiveData<BitcoinPriceModel>()
+    val liveData = MutableLiveData<BitcoinPriceModel>()
 
     override fun onCleared() {
         super.onCleared()
@@ -27,7 +27,7 @@ class BitcoinPriceViewModel @Inject constructor(
 
     fun bindToBitcoinPrice(timespan: Timespan) {
         compositeDisposable.clear()
-        creditListLiveData.postValue(BitcoinPriceModel.Loading)
+        liveData.postValue(BitcoinPriceModel.Loading)
         retrieveBitcoinPrice.getBehaviorStream(timespan)
             .observeOn(Schedulers.computation())
             .map { data ->
@@ -40,11 +40,11 @@ class BitcoinPriceViewModel @Inject constructor(
             }
             .subscribe(
                 {
-                    creditListLiveData.postValue(it)
+                    liveData.postValue(it)
                 },
                 { e ->
-                    Timber.e(e, "Error updating credit list live data")
-                    creditListLiveData.postValue(BitcoinPriceModel.Error)
+                    Timber.e(e, "Error updating bitcoin price model live data")
+                    liveData.postValue(BitcoinPriceModel.Error)
                 }
             )
             .apply { compositeDisposable.add(this) }

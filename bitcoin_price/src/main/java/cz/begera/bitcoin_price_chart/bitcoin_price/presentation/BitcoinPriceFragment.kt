@@ -75,7 +75,7 @@ class BitcoinPriceFragment : BaseInjectingFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, this.viewModeFactory).get(BitcoinPriceViewModel::class.java)
-        viewModel.creditListLiveData.observe(this, Observer { this.renderModel(it) })
+        viewModel.liveData.observe(this, Observer { this.renderModel(it) })
 
         var selectedChip = R.id.chip_timespan_30days
         chips_timespan.setOnCheckedChangeListener { _, resID ->

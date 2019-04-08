@@ -74,6 +74,8 @@ dependencies {
 
     // test
     testImplementation commonTestDependencies.junit
+    testImplementation commonTestDependencies.androidRunner
+    testImplementation commonTestDependencies.mockito
 
 }
 repositories {

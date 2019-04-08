@@ -30,6 +30,9 @@ ext {
     junit = '4.12'
     androidRunner = '1.1.2-alpha02'
     espresso = '3.2.0-alpha02'
+    architectureComponents = 'architectureComponents'
+    mockito = '2.26.0'
+    assertJ = '3.8.0'
 
     commonDependencies = [
             // Android
@@ -85,6 +88,9 @@ ext {
             junit                           : "junit:junit:${junit}",
             androidRunner                   : "androidx.test:runner:${androidRunner}",
             espresso                        : "androidx.test.espresso:espresso-core:${espresso}",
+            architectureComponentsTesting   : "android.arch.core:core-testing:${architectureComponents}",
+            mockito                         : "org.mockito:mockito-core:${mockito}",
+            assertj                         : "org.assertj:assertj-core:${assertJ}",
     ]
 
     developmentDependencies = [

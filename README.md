@@ -12,6 +12,7 @@ Main goals of this project
 - Create a good architecture with separate UI and business logic
 - Use MVVM (from [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html)), RxJava2 and Dagger2
 - Write well readable, maintainable and testable code
+- Multi-modular project structure
 - Use Kotlin :heart:
 
 Inspiration

@@ -22,13 +22,13 @@ class RetrieveBitcoinPrice @Inject constructor(
     override fun getBehaviorStream(params: Timespan): Observable<BlockchainChart> {
         return repository.getChart(params)
             // fetch if emitted value is none
-            .flatMapSingle { t -> fetchWhenNoneAndThenDrafts(params, t) }
+            .flatMapSingle { t -> fetchWhenNoneAndThenChart(params, t) }
             // unwrap if some, filter if none
             .compose(UnwrapOptionTransformer.create())
 
     }
 
-    private fun fetchWhenNoneAndThenDrafts(
+    private fun fetchWhenNoneAndThenChart(
         timespan: Timespan,
         chart: Option<BlockchainChart>
     ): Single<Option<BlockchainChart>> {

@@ -3,6 +3,7 @@ package cz.begera.bitcoin_price_chart
 import android.app.Application
 import cz.begera.bitcoin_price_chart.injection.ApplicationComponent
 import cz.begera.bitcoin_price_chart.injection.DaggerApplicationComponent
+import cz.begera.bitcoin_price_chart.utils.ReleaseTimberTree
 import timber.log.Timber
 
 /**
@@ -20,7 +21,7 @@ class BitcoinPriceApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         } else {
-            // setup release timber tree
+            Timber.plant(ReleaseTimberTree())
         }
     }
 }

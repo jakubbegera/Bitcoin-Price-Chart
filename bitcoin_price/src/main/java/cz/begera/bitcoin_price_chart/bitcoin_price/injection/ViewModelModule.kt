@@ -10,7 +10,7 @@ import dagger.multibindings.IntoMap
 /**
  * Created by Jakub Begera (jakub@begera.cz) on 06/04/2019.
  */
-@Module(includes = [BitcoinPriceViewModelModule::class])
+@Module
 abstract class ViewModelModule {
 
     @Binds

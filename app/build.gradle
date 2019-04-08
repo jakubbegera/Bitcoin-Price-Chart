@@ -67,5 +67,10 @@ dependencies {
     // test
     testImplementation commonTestDependencies.junit
     androidTestImplementation commonTestDependencies.androidRunner
+    androidTestImplementation commonTestDependencies.androidxJunit
     androidTestImplementation commonTestDependencies.espresso
+    androidTestImplementation commonTestDependencies.androidxTestCore
+    androidTestImplementation commonTestDependencies.androidxTestRunner
+    androidTestImplementation commonTestDependencies.androidxTestRules
+
 }

@@ -31,6 +31,9 @@ ext {
     architectureComponents = 'architectureComponents'
     mockito = '2.26.0'
     assertJ = '3.8.0'
+    androidxJunit = '1.1.0'
+    androidxTestCore = '1.1.0'
+    androidxTest = '1.1.1'
 
     commonDependencies = [
             // Android
@@ -85,6 +88,11 @@ ext {
             architectureComponentsTesting   : "android.arch.core:core-testing:${architectureComponents}",
             mockito                         : "org.mockito:mockito-core:${mockito}",
             assertj                         : "org.assertj:assertj-core:${assertJ}",
+            androidxJunit                   : "androidx.test.ext:junit:${androidxJunit}",
+            androidxTestCore                : "androidx.test:core:${androidxTestCore}",
+            androidxTestRunner              : "androidx.test:runner:${androidxTest}",
+            androidxTestRules               : "androidx.test:rules:${androidxTest}",
+
     ]
 
     developmentDependencies = [

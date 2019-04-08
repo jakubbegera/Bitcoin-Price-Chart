@@ -1,7 +1,7 @@
 :rocket: Bitcoin Price Chart
 ===================
 
-A simple Android application which fetch USD -> BTC exchange rate development in time and visualize the data in a chart.
+A simple Android application which fetch BTC -> USD exchange rate development in time and visualize the data in a chart.
 
 Available on [Google Play](https://play.google.com/store/apps/details?id=cz.begera.bitcoin_price_chart).
 

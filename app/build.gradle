@@ -6,13 +6,20 @@ apply plugin: 'kotlin-kapt'
 android {
     def androidVersions = rootProject.ext.android
 
+    def versionMajor = 1
+    def versionMinor = 0
+    def versionPatch = 0
+    def versionBuild = 0
+    def versionNameSuffix = ''
+
     compileSdkVersion androidVersions.compileSdkVersion
     defaultConfig {
         applicationId "cz.begera.bitcoin_price_chart"
         minSdkVersion androidVersions.minSdkVersion
         targetSdkVersion androidVersions.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}" +
+                "${versionNameSuffix.isEmpty() ? '' : '-' + versionNameSuffix}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

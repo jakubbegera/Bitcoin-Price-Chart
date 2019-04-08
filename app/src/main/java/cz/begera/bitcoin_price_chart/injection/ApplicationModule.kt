@@ -1,5 +1,6 @@
 package cz.begera.bitcoin_price_chart.injection
 
+import android.content.Context
 import cz.begera.bitcoin_price_chart.BitcoinPriceApplication
 import cz.begera.bitcoin_price_chart.base.injection.qualifiers.ForApplication
 import dagger.Module
@@ -13,6 +14,6 @@ class ApplicationModule {
 
     @ForApplication
     @Provides
-    fun provideApplicationContext(app: BitcoinPriceApplication) = app.applicationContext
+    fun provideApplicationContext(app: BitcoinPriceApplication): Context = app.applicationContext
 
 }

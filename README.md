@@ -1,7 +1,7 @@
 :rocket: Bitcoin Price Chart
 ===================
 
-A simple Android app which fetch information about the current Bitcoin market price (in USD) and display the data in a graph.
+A simple Android application which fetch BTC -> USD exchange rate development in time and visualize the data in a chart.
 
 Available on [Google Play](https://play.google.com/store/apps/details?id=cz.begera.bitcoin_price_chart).
 
